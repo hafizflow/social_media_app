@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "15647499849",
+    "project_id": "socialmediaapp-19b68",
+    "storage_bucket": "socialmediaapp-19b68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15647499849:android:25598393cdea3e09844198",
+        "android_client_info": {
+          "package_name": "com.hafi.social_media"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnqCsQu_E45TYn9s433PxfahIl2KYxoRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
