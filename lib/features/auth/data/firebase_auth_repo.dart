@@ -68,7 +68,7 @@ class FirebaseAuthRepo implements AuthRepo {
   //! GetCurrent user
   @override
   Future<AppUser?> getCurrentUser() async {
-    //* all currently logged in user in Firebase
+    //* get currently logged in user in Firebase
     final firebaseUser = _firebaseAuth.currentUser;
 
     //* no user logged in...
