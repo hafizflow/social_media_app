@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media_app/features/auth/presentation/pages/login_page.dart';
+import 'package:social_media_app/features/auth/presentation/pages/register_page.dart';
 import 'package:social_media_app/firebase_options.dart';
 import 'package:social_media_app/themes/light_mode.dart';
 
@@ -21,7 +21,7 @@ class SocialMediaApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Social Media App",
-      home: const LoginPage(),
+      home: const RegisterPage(),
       theme: lightTheme,
     );
   }

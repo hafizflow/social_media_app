@@ -5,19 +5,26 @@ class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
+  final TextInputAction textInputAction;
+  final TextInputType textInputType;
 
   const MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
     this.obscureText = false,
+    this.textInputAction = TextInputAction.next,
+    this.textInputType = TextInputType.text,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
       controller: controller,
       obscureText: obscureText,
+      textInputAction: textInputAction,
+      keyboardType: textInputType,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: GoogleFonts.poppins(
