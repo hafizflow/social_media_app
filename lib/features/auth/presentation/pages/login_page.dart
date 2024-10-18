@@ -11,7 +11,9 @@ import 'package:social_media_app/features/auth/presentation/components/my_rich_t
 import 'package:social_media_app/features/auth/presentation/components/my_text_field.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final void Function() togglePage;
+
+  const LoginPage({super.key, required this.togglePage});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -20,6 +22,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final pwController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    pwController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Logo
+                  //* Logo
                   Icon(
                     Iconsax.lock_circle5,
                     size: 100,
@@ -80,15 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                   MyRichText(
                     firstText: 'Don’t have account?  ',
                     secondText: 'Register Now!',
-                    onTap: () {
-                      const snackBar = SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        content: Text('Yay! A SnackBar!'),
-                        showCloseIcon: true,
-                      );
-
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    },
+                    onTap: () => widget.togglePage(),
                   ),
                 ],
               ),

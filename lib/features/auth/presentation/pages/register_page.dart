@@ -6,7 +6,9 @@ import 'package:social_media_app/features/auth/presentation/components/my_rich_t
 import 'package:social_media_app/features/auth/presentation/components/my_text_field.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final void Function() togglePage;
+
+  const RegisterPage({super.key, required this.togglePage});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -16,6 +18,14 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final pwController = TextEditingController();
   final nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    pwController.dispose();
+    nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +38,9 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Logo
+                  //* Logo
                   Icon(
-                    Iconsax.activity,
+                    Iconsax.activity5,
                     size: 100,
                     color: Theme.of(context).colorScheme.primary,
                   ),
@@ -38,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   // Create account message
                   Text(
-                    "Create an account",
+                    "Let's create an account for your",
                     style: GoogleFonts.poppins(
                       color: Theme.of(context).colorScheme.primaryFixed,
                     ),
@@ -86,15 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   MyRichText(
                     firstText: 'Already have account?  ',
                     secondText: 'Login Now!',
-                    onTap: () {
-                      const snackBar = SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        content: Text('Yay! A SnackBar!'),
-                        showCloseIcon: true,
-                      );
-
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    },
+                    onTap: () => widget.togglePage(),
                   ),
                 ],
               ),

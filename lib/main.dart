@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media_app/features/auth/presentation/pages/register_page.dart';
+import 'package:social_media_app/app.dart';
 import 'package:social_media_app/firebase_options.dart';
-import 'package:social_media_app/themes/light_mode.dart';
 
 void main() async {
   //* Firebase setup
@@ -11,18 +10,4 @@ void main() async {
 
   //* Run app
   runApp(const SocialMediaApp());
-}
-
-class SocialMediaApp extends StatelessWidget {
-  const SocialMediaApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Social Media App",
-      home: const RegisterPage(),
-      theme: lightTheme,
-    );
-  }
 }
