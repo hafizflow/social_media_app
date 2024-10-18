@@ -4,11 +4,14 @@
 // Also if the user doesn't have an account they can go to register page from here to create one
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_button.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_rich_text.dart';
+import 'package:social_media_app/features/auth/presentation/components/my_snackbar.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_text_field.dart';
+import 'package:social_media_app/features/auth/presentation/cubits/auth_cubit.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function() togglePage;
@@ -22,6 +25,23 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final pwController = TextEditingController();
+
+  //* login button pressed
+  void login() {
+    final String email = emailController.text.trim();
+    final String pw = pwController.text.trim();
+
+    // AuthCubit
+    final authCubit = context.read<AuthCubit>();
+
+    if (email.isNotEmpty && pw.isNotEmpty) {
+      // Login!
+      authCubit.login(email, pw);
+    } else {
+      // Show error message
+      mySnackBar(context, "Please enter both email and password");
+    }
+  }
 
   @override
   void dispose() {
@@ -80,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   // Login Button
                   MyButton(
                     text: "Login",
-                    onTap: () {},
+                    onTap: () => login(),
                   ),
 
                   const SizedBox(height: 50),
