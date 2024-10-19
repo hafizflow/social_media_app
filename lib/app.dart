@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_media_app/features/auth/data/firebase_auth_repo.dart';
+import 'package:social_media_app/features/auth/presentation/components/my_snackbar.dart';
 import 'package:social_media_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:social_media_app/features/auth/presentation/cubits/auth_state.dart';
 import 'package:social_media_app/features/auth/presentation/pages/auth_page.dart';
@@ -60,7 +61,11 @@ class SocialMediaApp extends StatelessWidget {
               );
             }
           },
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is AuthError) {
+              mySnackBar(context, state.message);
+            }
+          },
         ),
       ),
     );

@@ -49,8 +49,11 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoading());
 
-      final user =
-          await authRepo.registerWithEmailPassword(name, email, password);
+      final user = await authRepo.registerWithEmailPassword(
+        name,
+        email,
+        password,
+      );
 
       if (user != null) {
         _currentUser = user;

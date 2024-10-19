@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_button.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_rich_text.dart';
+import 'package:social_media_app/features/auth/presentation/components/my_snackbar.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_text_field.dart';
+import 'package:social_media_app/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:social_media_app/features/post/presentation/pages/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function() togglePage;
@@ -25,6 +29,21 @@ class _RegisterPageState extends State<RegisterPage> {
     pwController.dispose();
     nameController.dispose();
     super.dispose();
+  }
+
+  //* Register button pressed
+  void register() {
+    final email = emailController.text.trim();
+    final name = nameController.text.trim();
+    final pw = pwController.text;
+
+    final authCubit = context.read<AuthCubit>();
+
+    if (name.isNotEmpty && email.isNotEmpty && pw.isNotEmpty) {
+      authCubit.register(name, email, pw);
+    } else {
+      mySnackBar(context, 'All fields are required. Please complete the form!');
+    }
   }
 
   @override
@@ -60,7 +79,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   MyTextField(
                     controller: nameController,
                     hintText: "Name",
-                    obscureText: true,
                   ),
 
                   const SizedBox(height: 10),
@@ -87,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   // Register Button
                   MyButton(
                     text: "Register",
-                    onTap: () {},
+                    onTap: () => register(),
                   ),
 
                   const SizedBox(height: 50),
