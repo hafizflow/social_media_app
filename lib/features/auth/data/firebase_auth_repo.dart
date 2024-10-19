@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:social_media_app/features/auth/domain/entities/app_user.dart';
 import 'package:social_media_app/features/auth/domain/repos/auth_repo.dart';
@@ -5,6 +6,7 @@ import 'package:social_media_app/features/auth/domain/repos/auth_repo.dart';
 class FirebaseAuthRepo implements AuthRepo {
   //! Firebase instance/object
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   //! Login User
   @override
@@ -51,6 +53,12 @@ class FirebaseAuthRepo implements AuthRepo {
         email: email,
         name: name,
       );
+
+      //* Sava user information
+      await _firebaseFirestore
+          .collection("users")
+          .doc(user.uid)
+          .set(user.toJson());
 
       //* Return user
       return user;

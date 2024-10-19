@@ -7,6 +7,7 @@ import 'package:social_media_app/features/auth/presentation/components/my_snackb
 import 'package:social_media_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:social_media_app/features/auth/presentation/cubits/auth_state.dart';
 import 'package:social_media_app/features/auth/presentation/pages/auth_page.dart';
+import 'package:social_media_app/features/auth/presentation/pages/login_page.dart';
 import 'package:social_media_app/features/post/presentation/pages/home_page.dart';
 import 'package:social_media_app/themes/light_mode.dart';
 

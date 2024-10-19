@@ -1,4 +1,4 @@
-//! Auth Page - These page determines whether to show the login or register page based on the user's action
+// //! Auth Page - These page determines whether to show the login or register page based on the user's action
 
 import 'package:flutter/material.dart';
 import 'package:social_media_app/features/auth/presentation/pages/login_page.dart';
