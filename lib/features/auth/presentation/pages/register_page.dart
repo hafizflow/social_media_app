@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:social_media_app/config/my_animated_navigator.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_button.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_rich_text.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_snackbar.dart';
 import 'package:social_media_app/features/auth/presentation/components/my_text_field.dart';
 import 'package:social_media_app/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:social_media_app/features/auth/presentation/pages/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function() togglePage;
