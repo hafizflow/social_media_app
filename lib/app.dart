@@ -7,8 +7,9 @@ import 'package:social_media_app/features/auth/presentation/components/my_snackb
 import 'package:social_media_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:social_media_app/features/auth/presentation/cubits/auth_state.dart';
 import 'package:social_media_app/features/auth/presentation/pages/auth_page.dart';
-import 'package:social_media_app/features/auth/presentation/pages/login_page.dart';
 import 'package:social_media_app/features/home/presentation/pages/home_page.dart';
+import 'package:social_media_app/features/profile/data/firebase_profile_repo.dart';
+import 'package:social_media_app/features/profile/presentation/cubits/profile_cubit.dart';
 import 'package:social_media_app/themes/light_mode.dart';
 
 //* App - Root level
@@ -37,11 +38,24 @@ class SocialMediaApp extends StatelessWidget {
   // auth repo
   final authRepo = FirebaseAuthRepo();
 
+  // profile repo
+  final profileRepo = FirebaseProfileRepo();
+
   @override
   Widget build(BuildContext context) {
     //* Provide cubit to the app
-    return BlocProvider(
-      create: (context) => AuthCubit(authRepo: authRepo)..checkAuth(),
+    return MultiBlocProvider(
+      providers: [
+        // Auth Cubit
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(authRepo: authRepo)..checkAuth(),
+        ),
+
+        // Profile Cubit
+        BlocProvider<ProfileCubit>(
+          create: (context) => ProfileCubit(profileRepo: profileRepo),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Social Media App",
