@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:social_media_app/features/auth/domain/entities/app_user.dart';
 import 'package:social_media_app/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:social_media_app/features/profile/presentation/components/bio_box.dart';
 import 'package:social_media_app/features/profile/presentation/components/customHeading.dart';
 import 'package:social_media_app/features/profile/presentation/cubits/profile_cubit.dart';
 import 'package:social_media_app/features/profile/presentation/cubits/profile_states.dart';
+import 'package:social_media_app/features/profile/presentation/pages/edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   final String uid;
@@ -44,7 +44,9 @@ class _ProfilePageState extends State<ProfilePage> {
             appBar: AppBar(
               title: Text(
                 user.name,
-                style: GoogleFonts.poppins(),
+                style: GoogleFonts.poppins(
+                  color: Theme.of(context).colorScheme.primaryFixed,
+                ),
               ),
               actions: [
                 Padding(
@@ -54,11 +56,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EditProfilePage(),
+                          builder: (context) => EditProfilePage(user: user),
                         ),
                       );
                     },
-                    icon: const Icon(Iconsax.setting_2),
+                    icon: Icon(
+                      Icons.settings,
+                      color: Theme.of(context).colorScheme.primaryFixed,
+                    ),
                   ),
                 ),
               ],
