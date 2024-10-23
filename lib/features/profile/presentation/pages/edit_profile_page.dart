@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +19,14 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  // mobile pic image
+  PlatformFile? imageProfile;
+
+  // web pic image
+  Uint8List? imageWebBytes;
+
+  // pic image
+
   final bioController = TextEditingController();
 
   @override
