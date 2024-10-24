@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -80,20 +81,48 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 25),
 
                   // Profile image
-                  Container(
-                    height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(context).colorScheme.secondary,
+                  // Container(
+                  //   height: 150,
+                  //   width: 150,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(12),
+                  //     color: Theme.of(context).colorScheme.secondary,
+                  //   ),
+                  //   padding: const EdgeInsets.all(25),
+                  //   child: Center(
+                  //     child: Icon(
+                  //       Icons.person,
+                  //       size: 72,
+                  //       color: Theme.of(context).colorScheme.primary,
+                  //     ),
+                  //   ),
+                  // ),
+
+                  CachedNetworkImage(
+                    imageUrl: user.profileImageUrl,
+                    // loading
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+
+                    // error
+                    errorWidget: (context, url, error) => Icon(
+                      Icons.person,
+                      size: 72,
+                      color: Theme.of(context).colorScheme.primaryFixed,
                     ),
-                    padding: const EdgeInsets.all(25),
-                    child: Center(
-                      child: Icon(
-                        Icons.person,
-                        size: 72,
-                        color: Theme.of(context).colorScheme.primary,
+
+                    // loaded image
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Theme.of(context).colorScheme.secondary,
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
                       ),
+                      height: 150,
+                      width: 150,
                     ),
                   ),
 

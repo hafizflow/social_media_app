@@ -34,7 +34,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
   Future<void> updateProfile({
     required String uid,
     String? newBio,
-    String? imageProfileUrl,
+    String? imageMobilePath,
     Uint8List? imageWebBytes,
   }) async {
     try {
@@ -50,10 +50,10 @@ class ProfileCubit extends Cubit<ProfileStates> {
       // Profile picture update
       String? imageDownloadUrl;
 
-      if (imageWebBytes != null || imageProfileUrl != null) {
-        if (imageProfileUrl != null) {
+      if (imageWebBytes != null || imageMobilePath != null) {
+        if (imageMobilePath != null) {
           imageDownloadUrl =
-              await storageRepo.uploadProfileImageMobile(imageProfileUrl, uid);
+              await storageRepo.uploadProfileImageMobile(imageMobilePath, uid);
         } else if (imageWebBytes != null) {
           imageDownloadUrl =
               await storageRepo.uploadProfileImageWeb(imageWebBytes, uid);

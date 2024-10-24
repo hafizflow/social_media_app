@@ -37,10 +37,10 @@ class SocialMediaApp extends StatelessWidget {
   SocialMediaApp({super.key});
 
   // auth repo
-  final authRepo = FirebaseAuthRepo();
+  final firebaseAuthRepo = FirebaseAuthRepo();
 
   // profile repo
-  final profileRepo = FirebaseProfileRepo();
+  final firebaseProfileRepo = FirebaseProfileRepo();
 
   // storage repo
   final firebaseStorageRepo = FirebaseStorageRepo();
@@ -52,14 +52,15 @@ class SocialMediaApp extends StatelessWidget {
       providers: [
         // Auth Cubit
         BlocProvider<AuthCubit>(
-          create: (context) => AuthCubit(authRepo: authRepo)..checkAuth(),
+          create: (context) =>
+              AuthCubit(authRepo: firebaseAuthRepo)..checkAuth(),
         ),
 
         // Profile Cubit
         BlocProvider<ProfileCubit>(
           create: (context) => ProfileCubit(
-            profileRepo: profileRepo,
-            storageRepo: null,
+            profileRepo: firebaseProfileRepo,
+            storageRepo: firebaseStorageRepo,
           ),
         ),
       ],
