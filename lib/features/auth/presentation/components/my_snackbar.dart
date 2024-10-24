@@ -12,7 +12,7 @@ void mySnackBar(BuildContext context, String message, {Color? bgColor}) {
         ),
       ),
       behavior: SnackBarBehavior.floating,
-      backgroundColor: bgColor ?? Colors.red,
+      backgroundColor: bgColor ?? Colors.red.shade800,
     ),
   );
 }
