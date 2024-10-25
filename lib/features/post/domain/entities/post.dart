@@ -17,12 +17,12 @@ class Post {
     required this.createdAt,
   });
 
-  Post copy({String? imageUrl, String? text}) {
+  Post copy({String? imageUrl}) {
     return Post(
       id: id,
       userId: userId,
       userName: userName,
-      text: text ?? this.text,
+      text: text,
       imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt,
     );
