@@ -35,8 +35,9 @@ class FirebaseStorageRepo implements StorageRepo {
       final getDownloadUrl = await uploadTask.ref.getDownloadURL();
 
       return getDownloadUrl;
-    } catch (e) {}
-    return null;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   // web platform (bytes)
@@ -53,7 +54,19 @@ class FirebaseStorageRepo implements StorageRepo {
       final getDownloadUrl = await uploadTask.ref.getDownloadURL();
 
       return getDownloadUrl;
-    } catch (e) {}
-    return null;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  //! This section is for the post image upload
+  @override
+  Future<String?> uploadPostImageMobile(String path, String postId) {
+    return _uploadFile(path, postId, "post_images");
+  }
+
+  @override
+  Future<String?> uploadPostImageWeb(Uint8List fileBytes, String postId) {
+    return _uploadBytes(fileBytes, postId, "post_images");
   }
 }

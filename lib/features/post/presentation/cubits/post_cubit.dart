@@ -16,22 +16,24 @@ class PostCubit extends Cubit<PostStates> {
   }) : super(PostsInitial());
 
   // crate new post
-  Future<void> createPost(Post post,
-      {String? imagePath, Uint8List? bytes}) async {
+  Future<void> createPost(
+    Post post, {
+    String? imagePath,
+    Uint8List? bytes,
+  }) async {
     String? imageUrl;
 
     try {
       // handle image upload for mobile platforms (using file path)
       if (imagePath != null) {
         emit(PostsUploading());
-        imageUrl =
-            await storageRepo.uploadProfileImageMobile(imagePath, post.id);
+        imageUrl = await storageRepo.uploadPostImageMobile(imagePath, post.id);
       }
 
       // handle image upload for web platforms (using bytes)
       else if (bytes != null) {
         emit(PostsUploading());
-        imageUrl = await storageRepo.uploadProfileImageWeb(bytes, post.id);
+        imageUrl = await storageRepo.uploadPostImageWeb(bytes, post.id);
       }
 
       // give imageUrl to post
@@ -39,6 +41,9 @@ class PostCubit extends Cubit<PostStates> {
 
       // create post in the backend
       postRepo.createPost(newPost);
+
+      // fetch all post
+      fetchAllPost();
     } catch (e) {
       emit(PostsError("Failed to create post ${e.toString()}"));
     }

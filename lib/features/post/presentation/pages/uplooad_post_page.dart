@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
@@ -83,7 +84,7 @@ class _UploadPostPageState extends State<UploadPostPage> {
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       userId: currentUser!.uid,
       userName: currentUser!.name,
-      text: textController.text.trim(),
+      text: textController.text,
       imageUrl: '',
       createdAt: DateTime.now(),
     );
@@ -95,6 +96,7 @@ class _UploadPostPageState extends State<UploadPostPage> {
     if (kIsWeb) {
       postCubit.createPost(newPost, bytes: imagePickedFile!.bytes);
     } else {
+      log(imagePickedFile!.path!);
       postCubit.createPost(newPost, imagePath: imagePickedFile!.path);
     }
   }
@@ -117,7 +119,11 @@ class _UploadPostPageState extends State<UploadPostPage> {
       listener: (context, state) {
         if (state is PostsLoaded) {
           Navigator.pop(context);
-          mySnackBar(context, 'Post uploaded successfully');
+          mySnackBar(
+            context,
+            'Post uploaded successfully',
+            bgColor: Colors.teal,
+          );
         }
       },
     );
@@ -136,7 +142,9 @@ class _UploadPostPageState extends State<UploadPostPage> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
-              onPressed: uploadPost,
+              onPressed: () {
+                uploadPost();
+              },
               icon: Icon(
                 Icons.upload,
                 color: Theme.of(context).colorScheme.primaryFixed,
