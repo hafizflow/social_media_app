@@ -81,50 +81,35 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 25),
 
                   // Profile image
-                  // Container(
-                  //   height: 150,
-                  //   width: 150,
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(12),
-                  //     color: Theme.of(context).colorScheme.secondary,
-                  //   ),
-                  //   padding: const EdgeInsets.all(25),
-                  //   child: Center(
-                  //     child: Icon(
-                  //       Icons.person,
-                  //       size: 72,
-                  //       color: Theme.of(context).colorScheme.primary,
-                  //     ),
-                  //   ),
-                  // ),
-
                   CachedNetworkImage(
-                    imageUrl: user.profileImageUrl,
-                    // loading
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
+                      imageUrl: user.profileImageUrl,
 
-                    // error
-                    errorWidget: (context, url, error) => Icon(
-                      Icons.person,
-                      size: 72,
-                      color: Theme.of(context).colorScheme.primaryFixed,
-                    ),
+                      // loading
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
 
-                    // loaded image
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Theme.of(context).colorScheme.secondary,
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      height: 150,
-                      width: 150,
-                    ),
-                  ),
+                      // error
+                      errorWidget: (context, url, error) => Icon(
+                            Icons.person,
+                            size: 72,
+                            color: Theme.of(context).colorScheme.primaryFixed,
+                          ),
+
+                      // loaded image
+                      imageBuilder: (context, imageProvider) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Theme.of(context).colorScheme.secondary,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          height: 150,
+                          width: 150,
+                        );
+                      }),
 
                   const SizedBox(height: 25),
 
